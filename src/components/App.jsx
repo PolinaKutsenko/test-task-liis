@@ -6,7 +6,7 @@ import routes from '../routes.js';
 import { useAuth } from '../hooks/index.js';
 import NotFoundPage from './NotFoundPage.jsx';
 import LoginPage from './LoginPage.jsx';
-import HotelPage from './HotelPage.jsx';
+import HotelPage from './HotelPage/HotelPage.jsx';
 
 const PrivateOutlet = () => {
   const auth = useAuth();

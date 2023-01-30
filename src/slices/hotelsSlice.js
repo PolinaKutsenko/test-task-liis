@@ -1,7 +1,11 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
-  hotelList: [],
+  hotelList: {
+    ids: [],
+    entities: {},
+  },
+  favoriteHotelsId: [],
 };
 
 const hotelsSlice = createSlice({
@@ -9,7 +13,20 @@ const hotelsSlice = createSlice({
   initialState,
   reducers: {
     fetchData: (state, action) => {
-      state.hotelList = action.payload;
+      console.log('fetchdata!!');
+      const hotelArray = action.payload;
+      console.log('hotelarray', hotelArray);
+      hotelArray.forEach((item) => {
+        state.hotelList.entities[item.hotelId] = item;
+        state.hotelList.ids.push(item.hotelId);
+      });
+      console.log(state.hotelList);
+    },
+    addFavoriteHotel: (state, action) => {
+      const hotelId = action.payload;
+      state.favoriteHotelsId.push(hotelId);
+      const favoriteIdsList = localStorage.getItem('favoriteIds') ? localStorage.getItem('favoriteIds') : '';
+      localStorage.setItem('favoriteIds', `${favoriteIdsList} ${hotelId}`);
     },
   },
 });

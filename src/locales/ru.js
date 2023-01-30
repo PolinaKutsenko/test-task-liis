@@ -28,6 +28,15 @@ export default {
         found: 'Найти',
         initial_location: 'Москва',
       },
+      calendar: {
+        today: 'Сегодня',
+        calendar: 'Календарь',
+      },
+      hotel_item: {
+        price: 'Price',
+        currency: '₽',
+        day: 'день',
+      },
     },
     not_found_page: {
       page_not_found: 'Страница не найдена',
