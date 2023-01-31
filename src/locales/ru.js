@@ -21,6 +21,8 @@ export default {
       hotels: 'Отели',
       nameNavBar: 'Simple Hotel Check',
       signOut: 'Выйти',
+      favorites: 'Избранное',
+      addInFavorite: 'Добавлено в избранное: {{hotelCount}} отеля',
       form_of_found_hotels: {
         location: 'Локация',
         date: 'Дата заселения',
@@ -35,7 +37,11 @@ export default {
       hotel_item: {
         price: 'Price',
         currency: '₽',
-        day: 'день',
+        days: {
+          key: '{{count}} день',
+          key_plural: '{{count}} дней',
+          key_plural_many: '{{count}} дня',
+        },
       },
     },
     not_found_page: {

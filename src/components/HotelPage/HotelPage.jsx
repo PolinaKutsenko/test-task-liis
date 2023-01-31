@@ -5,18 +5,15 @@ import {
 } from 'react-bootstrap';
 import { useFormik } from 'formik';
 
+import { useAuth } from '../../hooks/index.js';
 import sagaActions from '../../slices/saga/sagaActions.js';
-import { setSearchParams } from '../../slices/searchSlice.js';
+import { setSearchParams, setCounterDaysStay } from '../../slices/searchSlice.js';
 import { show } from '../../slices/calendarSlice.js';
+import translateCitiesOnRu from '../../locales/translateCitiesOnRu.js';
+import formatDateToStringByDot from '../../formatters/formatDateToStringByDot.js';
+import formatDateToStringByFullDate from '../../formatters/formatDateToStringByFullDate.js';
 import HotelCalendar from './HotelCalendar.jsx';
-// import HotelItem from './HotelItem.jsx';
-
-export const formatDate = (date) => {
-  const year = date.getFullYear();
-  const month = (date.getMonth() + 1) > 10 ? date.getMonth() + 1 : `0${date.getMonth() + 1}`;
-  const day = date.getDate() > 10 ? date.getDate() : `0${date.getDate()}`;
-  return `${day}.${month}.${year}`;
-};
+import HotelItem from './HotelItem.jsx';
 
 const HotelForm = ({ t }) => {
   const dispatch = useDispatch();
@@ -26,11 +23,12 @@ const HotelForm = ({ t }) => {
   const formik = useFormik({
     initialValues: {
       location: `${t('hotel_page.form_of_found_hotels.initial_location')}`,
-      date: formatDate(selectedDate),
+      date: formatDateToStringByDot(selectedDate),
       days: '1',
     },
-    onSubmit: (values) => {
-      dispatch(setSearchParams(values));
+    onSubmit: ({ location, days }) => {
+      dispatch(setCounterDaysStay(days));
+      dispatch(setSearchParams({ location, date: selectedDate, days }));
       dispatch({ type: sagaActions.fetch_data });
       console.log(hotelList);
     },
@@ -77,12 +75,12 @@ const HotelForm = ({ t }) => {
 };
 
 const HotelPage = () => {
-  // const hotelList = useSelector((state) => state.hotels.hotelList);
+  const hotelListId = useSelector((state) => state.hotels.hotelList.ids);
+  const city = useSelector(({ searchParams }) => searchParams.searchParams.location);
+  const { date: checkInDate } = useSelector((state) => state.calendar);
+  const formattedCheckInDate = formatDateToStringByFullDate(checkInDate);
   const { t } = useTranslation();
-
-  /* const renderHotel = () => hotelList.map((hotel) => (
-    <p key={hotel.id}>{hotel.title}</p>
-  )); */
+  const auth = useAuth();
 
   return (
     <>
@@ -94,6 +92,7 @@ const HotelPage = () => {
             <Navbar.Toggle />
             <Navbar.Collapse className="justify-content-end">
               <Navbar.Text>{t('hotel_page.signOut')}</Navbar.Text>
+              <Button variant="secondary" onClick={() => auth.logOut()}><i className="fas fa-arrow-right-from-bracket" /></Button>
             </Navbar.Collapse>
           </Container>
         </Navbar>
@@ -119,8 +118,17 @@ const HotelPage = () => {
             <Col md={8}>
               <Card>
                 <Card.Body className="p-5">
-                  <Card.Title>date</Card.Title>
-                  <Card.Text>Hotels</Card.Text>
+                  <Row>
+                    <span>
+                      <span><h2 display="inline">{`${t('hotel_page.hotels')}`}</h2></span>
+                      <span><i className="fas fa-angle-right fa-2x" /></span>
+                      <span><h2 display="inline">{`${translateCitiesOnRu[city]}`}</h2></span>
+                      <span><h2 display="inline">{formattedCheckInDate}</h2></span>
+                    </span>
+                  </Row>
+                  <Row>Pictures</Row>
+                  <Row>{t('hotel_page.addInFavorite', { hotelCount: 5 })}</Row>
+                  <Row>{hotelListId.map((id) => (<HotelItem key={id} hotelId={id} />))}</Row>
                 </Card.Body>
               </Card>
             </Col>

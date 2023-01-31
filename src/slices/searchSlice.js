@@ -1,21 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit';
+import translateCitiesOnEn from '../locales/translateCitiesOnEn.js';
+import formatDateToStringByDash from '../formatters/formatDateToStringByDash.js';
 
 const getInitialURL = () => new URL('http://engine.hotellook.com/api/v2/cache.json');
-
-const formatDateString = (dateString) => {
-  const year = Number(dateString.split('.')[2]);
-  const monthString = dateString.split('.')[1];
-  const month = monthString.startsWith('0') ? monthString.split('')[1] : monthString;
-  const day = Number(dateString.split('.')[0]);
-  return new Date(year, Number(month) - 1, day);
-};
-
-const formatDate = (date) => {
-  const year = date.getFullYear();
-  const month = (date.getMonth() + 1) > 10 ? date.getMonth() + 1 : `0${date.getMonth() + 1}`;
-  const day = date.getDate() > 10 ? date.getDate() : `0${date.getDate()}`;
-  return `${year}-${month}-${day}`;
-};
 
 const initialState = {
   url: '',
@@ -26,6 +13,7 @@ const initialState = {
     checkOut: '',
     limit: '10',
   },
+  counterDaysStay: '1',
   isLoaded: true,
 };
 
@@ -33,19 +21,23 @@ const searchSlice = createSlice({
   name: 'search',
   initialState,
   reducers: {
+    setCounterDaysStay: (state, action) => {
+      state.counterDaysStay = action.payload;
+    },
     setSearchParams: (state, action) => {
-      const { /* location, */ date, days } = action.payload;
-      const checkInData = formatDateString(date);
-      const checkInDataYear = checkInData.getFullYear();
-      const checkInDataMonth = checkInData.getMonth();
-      const checkInDataDate = checkInData.getDate() + Number(days);
-      const checkOutData = new Date(checkInDataYear, checkInDataMonth, checkInDataDate);
+      const { location, date, days } = action.payload;
+      const checkInDate = new Date(date);
+      const translateLocation = translateCitiesOnEn[location];
+      const checkInDateYear = checkInDate.getFullYear();
+      const checkInDateMonth = checkInDate.getMonth();
+      const checkInDateDate = checkInDate.getDate() + Number(days);
+      const checkOutDate = new Date(checkInDateYear, checkInDateMonth, checkInDateDate);
 
       state.searchParams = {
-        location: 'Moscow',
+        location: translateLocation,
         currency: 'rub',
-        checkIn: formatDate(checkInData),
-        checkOut: formatDate(checkOutData),
+        checkIn: formatDateToStringByDash(checkInDate),
+        checkOut: formatDateToStringByDash(checkOutDate),
         limit: '10',
       };
     },
@@ -63,6 +55,8 @@ const searchSlice = createSlice({
   },
 });
 
-export const { setSearchParams, setUrl, fetchFailed } = searchSlice.actions;
+export const {
+  setCounterDaysStay, setSearchParams, setUrl, fetchFailed,
+} = searchSlice.actions;
 
 export default searchSlice.reducer;

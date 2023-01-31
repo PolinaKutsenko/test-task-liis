@@ -5,7 +5,7 @@ import Axios from 'axios';
 import { fetchData } from '../hotelsSlice.js';
 import { setUrl, fetchFailed, setSearchParams } from '../searchSlice.js';
 import sagaActions from './sagaActions.js';
-import { formatDate } from '../../components/HotelPage/HotelPage.jsx';
+import formatDateToStringByDash from '../../formatters/formatDateToStringByDash.js';
 
 const callAPI = async ({ url, method, data }) => {
   const result = await Axios({ url, method, data });
@@ -28,15 +28,15 @@ export function* fetchDataSaga() {
 function* initialSaga() {
   const date = yield select(({ calendar }) => calendar.date);
   const initialValues = {
-    location: 'Moscow',
-    date: formatDate(date),
+    location: 'Москва',
+    date: formatDateToStringByDash(date),
     days: '1',
   };
   yield put(setSearchParams(initialValues));
-  yield fetchDataSaga();
+  yield call(fetchDataSaga);
 }
 
 export default function* rootSaga() {
-  yield initialSaga();
+  yield call(initialSaga);
   yield takeEvery(sagaActions.fetch_data, fetchDataSaga);
 }
