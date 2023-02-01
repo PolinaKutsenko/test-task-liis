@@ -22,13 +22,21 @@ export default {
       nameNavBar: 'Simple Hotel Check',
       signOut: 'Выйти',
       favorites: 'Избранное',
-      addInFavorite: 'Добавлено в избранное: {{hotelCount}} отеля',
+      favoritesHotelCount_one: 'Добавлено в избранное: {{count}} отель',
+      favoritesHotelCount_few: 'Добавлено в избранное: {{count}} отеля',
+      favoritesHotelCount_many: 'Добавлено в избранное: {{count}} отелей',
       form_of_found_hotels: {
         location: 'Локация',
         date: 'Дата заселения',
         days: 'Количество дней',
         found: 'Найти',
         initial_location: 'Москва',
+      },
+      form_of_sorted_favorites: {
+        sorted_by_price: 'Сортировать по цене',
+        sorted_by_stars: 'Сортировать по количеству звезд',
+        increase: 'По возрастанию',
+        decrease: 'По убыванию',
       },
       calendar: {
         today: 'Сегодня',
@@ -37,11 +45,9 @@ export default {
       hotel_item: {
         price: 'Price',
         currency: '₽',
-        days: {
-          key: '{{count}} день',
-          key_plural: '{{count}} дней',
-          key_plural_many: '{{count}} дня',
-        },
+        daysCount_one: '{{count}} день',
+        daysCount_few: '{{count}} дня',
+        daysCount_many: '{{count}} дней',
       },
     },
     not_found_page: {

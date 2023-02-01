@@ -16,7 +16,7 @@ const PrivateOutlet = () => {
 const App = () => (
   <Routes>
     <Route path={routes.hotelsPagePath()} element={<PrivateOutlet />}>
-      <Route index element={<HotelPage />} />
+      <Route path="/" element={<HotelPage />} />
     </Route>
     <Route path={routes.loginPagePath()} element={<LoginPage />} />
     <Route path="/*" element={<NotFoundPage />} />

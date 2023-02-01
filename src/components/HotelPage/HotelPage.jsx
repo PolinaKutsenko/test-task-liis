@@ -1,85 +1,25 @@
 import { useTranslation } from 'react-i18next';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import {
-  Col, Container, Navbar, Row, Card, Form, Button, InputGroup,
+  Col, Container, Navbar, Row, Card, Button,
 } from 'react-bootstrap';
-import { useFormik } from 'formik';
 
 import { useAuth } from '../../hooks/index.js';
-import sagaActions from '../../slices/saga/sagaActions.js';
-import { setSearchParams, setCounterDaysStay } from '../../slices/searchSlice.js';
-import { show } from '../../slices/calendarSlice.js';
 import translateCitiesOnRu from '../../locales/translateCitiesOnRu.js';
-import formatDateToStringByDot from '../../formatters/formatDateToStringByDot.js';
 import formatDateToStringByFullDate from '../../formatters/formatDateToStringByFullDate.js';
-import HotelCalendar from './HotelCalendar.jsx';
-import HotelItem from './HotelItem.jsx';
-
-const HotelForm = ({ t }) => {
-  const dispatch = useDispatch();
-  const hotelList = useSelector((state) => state.hotels.hotelList);
-  const selectedDate = useSelector((state) => state.calendar.date);
-
-  const formik = useFormik({
-    initialValues: {
-      location: `${t('hotel_page.form_of_found_hotels.initial_location')}`,
-      date: formatDateToStringByDot(selectedDate),
-      days: '1',
-    },
-    onSubmit: ({ location, days }) => {
-      dispatch(setCounterDaysStay(days));
-      dispatch(setSearchParams({ location, date: selectedDate, days }));
-      dispatch({ type: sagaActions.fetch_data });
-      console.log(hotelList);
-    },
-  });
-
-  return (
-    <Form onSubmit={formik.handleSubmit}>
-      <Form.Group>
-        <Form.Label htmlFor="location">{t('hotel_page.form_of_found_hotels.location')}</Form.Label>
-        <Form.Control
-          id="location"
-          name="location"
-          required
-          value={formik.values.location}
-          onChange={formik.handleChange}
-        />
-      </Form.Group>
-      <Form.Group>
-        <Form.Label htmlFor="date">{t('hotel_page.form_of_found_hotels.date')}</Form.Label>
-        <InputGroup className="mb-3">
-          <Form.Control
-            id="date"
-            name="date"
-            required
-            value={formik.values.date}
-            onChange={formik.handleChange}
-          />
-          <Button variant="secondary" onClick={() => dispatch(show())}><i className="far fa-calendar" /></Button>
-        </InputGroup>
-      </Form.Group>
-      <Form.Group>
-        <Form.Label htmlFor="days">{t('hotel_page.form_of_found_hotels.days')}</Form.Label>
-        <Form.Control
-          id="days"
-          name="days"
-          required
-          value={formik.values.days}
-          onChange={formik.handleChange}
-        />
-      </Form.Group>
-      <Button variant="secondary" type="submit">{t('hotel_page.form_of_found_hotels.found')}</Button>
-    </Form>
-  );
-};
+import HotelCalendar from './components/HotelCalendar.jsx';
+import HotelItem from './components/HotelItem.jsx';
+import HotelCarousel from './components/HotelCarousel.jsx';
+import HotelFavoritesForm from './components/HotelFavoritesForm.jsx';
+import HotelSearchForm from './components/HotelSearchForm.jsx';
 
 const HotelPage = () => {
+  const { t } = useTranslation();
   const hotelListId = useSelector((state) => state.hotels.hotelList.ids);
+  const favoriteHotelListId = useSelector((state) => state.favorites.favoriteHotels.ids);
   const city = useSelector(({ searchParams }) => searchParams.searchParams.location);
   const { date: checkInDate } = useSelector((state) => state.calendar);
   const formattedCheckInDate = formatDateToStringByFullDate(checkInDate);
-  const { t } = useTranslation();
   const auth = useAuth();
 
   return (
@@ -102,15 +42,19 @@ const HotelPage = () => {
               <Row>
                 <Card>
                   <Card.Body className="p-5">
-                    <HotelForm t={t} />
+                    <HotelSearchForm />
                   </Card.Body>
                 </Card>
               </Row>
               <Row>
                 <Card>
                   <Card.Body className="p-5">
-                    <Card.Title>title</Card.Title>
-                    <Card.Text>title</Card.Text>
+                    <Row><h3>{t('hotel_page.favorites')}</h3></Row>
+                    <Row><HotelFavoritesForm /></Row>
+                    <Row>
+                      {favoriteHotelListId.map((id) => (
+                        <HotelItem key={id} hotelId={id} />))}
+                    </Row>
                   </Card.Body>
                 </Card>
               </Row>
@@ -120,14 +64,18 @@ const HotelPage = () => {
                 <Card.Body className="p-5">
                   <Row>
                     <span>
-                      <span><h2 display="inline">{`${t('hotel_page.hotels')}`}</h2></span>
+                      <span><h2 style={{ display: 'inline' }}>{`${t('hotel_page.hotels')} `}</h2></span>
                       <span><i className="fas fa-angle-right fa-2x" /></span>
-                      <span><h2 display="inline">{`${translateCitiesOnRu[city]}`}</h2></span>
-                      <span><h2 display="inline">{formattedCheckInDate}</h2></span>
+                      <span><h2 style={{ display: 'inline' }}>{` ${translateCitiesOnRu[city]} `}</h2></span>
+                      <span><h2 style={{ display: 'inline', textAlign: 'right' }}>{formattedCheckInDate}</h2></span>
                     </span>
                   </Row>
-                  <Row>Pictures</Row>
-                  <Row>{t('hotel_page.addInFavorite', { hotelCount: 5 })}</Row>
+                  <Row className="justify-content-md-center">
+                    <Col md={{ span: 6, offset: 3 }}>
+                      <HotelCarousel />
+                    </Col>
+                  </Row>
+                  <Row>{t('hotel_page.favoritesHotelCount', { count: favoriteHotelListId.length })}</Row>
                   <Row>{hotelListId.map((id) => (<HotelItem key={id} hotelId={id} />))}</Row>
                 </Card.Body>
               </Card>

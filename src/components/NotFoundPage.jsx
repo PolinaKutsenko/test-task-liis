@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
+
 import notFoundPicture from '../assets/notFoundPicture.png';
 import routes from '../routes.js';
 

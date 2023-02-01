@@ -50,8 +50,8 @@ const LoginPage = () => {
         .required(t('login_page.validation_errors.username.required')),
       password: yup
         .string()
-        .min(8, t('login_page.validation_errors.password.min'))
         .matches(/[^а-яА-ЯёЁ,;:&()*%#-]+/, t('login_page.validation_errors.password.matches'))
+        .min(8, t('login_page.validation_errors.password.min'))
         .required(t('login_page.validation_errors.password.required')),
     }),
     onSubmit: () => {

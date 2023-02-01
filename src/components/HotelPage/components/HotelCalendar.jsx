@@ -5,9 +5,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import cn from 'classnames';
 import _ from 'lodash';
-import '../../css/HotelCalendar.css';
 
-import { close, setDate } from '../../slices/calendarSlice.js';
+import '../../../css/HotelCalendar.css';
+
+import { close, setDate } from '../../../slices/calendarSlice.js';
 
 const DAYS_IN_WEEK = 7;
 
