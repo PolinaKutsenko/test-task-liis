@@ -1,0 +1,41 @@
+.hotel-page-search-form-container {
+    width: 360px;
+    height: 410px;
+    margin: 24px 24px 24px 100px;
+}
+
+.hotel-page-favorites-container {
+    width: 360px;
+    height: 472px;
+    margin: 24px 24px 24px 100px;
+    padding: 0px;
+}
+
+.overflow-element-favorites {
+    width: 296px;
+    height: 280px;
+    overflow: auto;
+    margin-top: 10px;
+    margin-bottom: 5px;
+}
+
+.hotel-page-hotels-container {
+    width: 664px;
+    height: 930px;
+    margin: 24px;
+}
+
+.overflow-element-hotels {
+    width: 584px;
+    height: 480px;
+    margin-top: 32px;
+    overflow: auto;
+}
+
+.hotel-page-favorites-name {
+    padding: 0px;
+}
+
+.hotel-page-title {
+  padding-bottom: 20px;
+}

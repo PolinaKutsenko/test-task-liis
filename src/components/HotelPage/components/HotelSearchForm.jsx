@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { Form, Button, InputGroup } from 'react-bootstrap';
 import { useFormik } from 'formik';
 
+import '../../../css/HotelSearchForm.css';
 import sagaActions from '../../../slices/saga/sagaActions.js';
 import { setSearchParams, setCounterDaysStay } from '../../../slices/searchSlice.js';
 import { show } from '../../../slices/calendarSlice.js';
@@ -41,6 +42,7 @@ const HotelSearchForm = () => {
           required
           value={formik.values.location}
           onChange={formik.handleChange}
+          className="hotel-form-input"
         />
       </Form.Group>
       <Form.Group>
@@ -52,6 +54,7 @@ const HotelSearchForm = () => {
             required
             value={formik.values.date}
             onChange={formik.handleChange}
+            className="hotel-form-input"
           />
           <Button variant="secondary" onClick={() => dispatch(show())}><i className="far fa-calendar" /></Button>
         </InputGroup>
@@ -64,9 +67,10 @@ const HotelSearchForm = () => {
           required
           value={formik.values.days}
           onChange={formik.handleChange}
+          className="hotel-form-input"
         />
       </Form.Group>
-      <Button variant="secondary" type="submit">{t('hotel_page.form_of_found_hotels.found')}</Button>
+      <Button className="hotel-form-button" variant="secondary" type="submit">{t('hotel_page.form_of_found_hotels.found')}</Button>
     </Form>
   );
 };

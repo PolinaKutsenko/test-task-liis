@@ -57,12 +57,14 @@ const HotelItem = ({ hotelId }) => {
     <Container fluid className="h-900">
       <Card>
         <Row className="justify-content-center align-content-center h-100">
+          {!favoriteHotels.includes(hotelId) && (
           <Col>
             <span className="fa-stack fa-3x homeIcon">
               <i className="fas fa-circle fa-stack-2x" />
               <i className="fas fa-house fa-stack-1x fa-inverse" />
             </span>
           </Col>
+          )}
           <Col xs={6}>
             <Row><h5>{hotelData.hotelName}</h5></Row>
             <Row><p>{`${formattedCheckInDate} - ${t('hotel_page.hotel_item.daysCount', { count: Number(counterDaysStay) })}`}</p></Row>

@@ -4,6 +4,7 @@ import {
   Col, Container, Navbar, Row, Card, Button,
 } from 'react-bootstrap';
 
+import '../../css/HotelPage.css';
 import { useAuth } from '../../hooks/index.js';
 import formatDateToStringByFullDate from '../../formatters/formatDateToStringByFullDate.js';
 import HotelCalendar from './components/HotelCalendar.jsx';
@@ -39,18 +40,18 @@ const HotelPage = () => {
           <Row className="justify-content-center align-content-center h-100">
             <Col md={4}>
               <Row>
-                <Card>
+                <Card className="hotel-page-search-form-container">
                   <Card.Body className="p-5">
                     <HotelSearchForm />
                   </Card.Body>
                 </Card>
               </Row>
               <Row>
-                <Card>
+                <Card className="hotel-page-favorites-container">
                   <Card.Body className="p-5">
-                    <Row><h3>{t('hotel_page.favorites')}</h3></Row>
+                    <Row className="hotel-page-favorites-name"><h3>{t('hotel_page.favorites')}</h3></Row>
                     <Row><HotelFavoritesForm /></Row>
-                    <Row>
+                    <Row className="overflow-element-favorites">
                       {favoriteHotelListId.map((id) => (
                         <HotelItem key={id} hotelId={id} />))}
                     </Row>
@@ -59,9 +60,9 @@ const HotelPage = () => {
               </Row>
             </Col>
             <Col md={8}>
-              <Card>
+              <Card className="hotel-page-hotels-container">
                 <Card.Body className="p-5">
-                  <Row>
+                  <Row className="hotel-page-title">
                     <span>
                       <span><h2 style={{ display: 'inline' }}>{`${t('hotel_page.hotels')} `}</h2></span>
                       <span><i className="fas fa-angle-right fa-2x" /></span>
@@ -75,7 +76,7 @@ const HotelPage = () => {
                     </Col>
                   </Row>
                   <Row>{t('hotel_page.favoritesHotelCount', { count: favoriteHotelListId.length })}</Row>
-                  <Row>{hotelListId.map((id) => (<HotelItem key={id} hotelId={id} />))}</Row>
+                  <Row className="overflow-element-hotels">{hotelListId.map((id) => (<HotelItem key={id} hotelId={id} />))}</Row>
                 </Card.Body>
               </Card>
             </Col>
