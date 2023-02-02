@@ -5,7 +5,6 @@ import {
 } from 'react-bootstrap';
 
 import { useAuth } from '../../hooks/index.js';
-import translateCitiesOnRu from '../../locales/translateCitiesOnRu.js';
 import formatDateToStringByFullDate from '../../formatters/formatDateToStringByFullDate.js';
 import HotelCalendar from './components/HotelCalendar.jsx';
 import HotelItem from './components/HotelItem.jsx';
@@ -66,7 +65,7 @@ const HotelPage = () => {
                     <span>
                       <span><h2 style={{ display: 'inline' }}>{`${t('hotel_page.hotels')} `}</h2></span>
                       <span><i className="fas fa-angle-right fa-2x" /></span>
-                      <span><h2 style={{ display: 'inline' }}>{` ${translateCitiesOnRu[city]} `}</h2></span>
+                      <span><h2 style={{ display: 'inline' }}>{` ${city} `}</h2></span>
                       <span><h2 style={{ display: 'inline', textAlign: 'right' }}>{formattedCheckInDate}</h2></span>
                     </span>
                   </Row>

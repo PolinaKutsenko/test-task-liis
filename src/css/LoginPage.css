@@ -1,0 +1,204 @@
+@font-face {
+    font-weight: 400;
+    font-family: Roboto;
+    src: url("../assets/fonts/Roboto-Regular.ttf");
+  }
+  
+  @font-face {
+    font-weight: 500;
+    font-family: Roboto;
+    src: url("../assets/fonts/Roboto-Bold.ttf");
+  }
+  
+  @font-face {
+    font-weight: 300;
+    font-family: Roboto;
+    src: url("../assets/fonts/Roboto-Light.ttf");
+  }
+  
+  body {
+    font-family: Roboto, sans-serif;
+  }
+  
+  .background-image-login-page {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0px;
+    top: 0px;
+  
+    background: rgba(255, 255, 255, 0.6);
+  }
+  
+  .fade-login-page {
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+  
+    position: absolute;
+    background: rgba(245, 242, 242, 0.7);
+  }
+  
+  .form-container-login-page {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 32px;
+    gap: 32px;
+  
+    position: absolute;
+    width: 409px;
+    height: 382px;
+    left: calc(50% - 409px/2 - 0.5px);
+    top: calc(50% - 382px/2);
+  
+    background: #FFFFFF;
+  
+    box-shadow: 0px 4px 33px rgba(0, 0, 0, 0.04);
+    border-radius: 16px;
+  }
+  
+  .simple-hotel {
+    width: 345px;
+    height: 28px;
+  
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 24px;
+    line-height: 28px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+  
+    color: #424242;
+  
+    flex: none;
+    order: 0;
+    align-self: stretch;
+    flex-grow: 0;
+  }
+  
+  .form-label-login-page {
+    width: 45px;
+    height: 19px;
+    margin-top: 7px;
+    margin-bottom: 7px;
+
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 300;
+    font-size: 16px;
+    line-height: 19px;
+
+    display: flex;
+    align-items: center;
+
+    color: #424242;
+
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+  }
+  
+  .invalid-label-login-page {
+    color: #EB1717;
+  }
+  
+  .invalid-feedback-login-page {
+    height: 14px;
+    margin: 7px;
+  
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 300;
+    font-size: 12px;
+    line-height: 14px;
+  
+    display: flex;
+    align-items: center;
+  
+    color: #EB1717;
+  
+    flex: none;
+    order: 2;
+    flex-grow: 0;
+  }
+  
+  .form-control-input {
+    box-sizing: border-box;
+  
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    padding: 15px;
+    gap: 10px;
+  
+    width: 345px;
+    height: 50px;
+  
+    background: #FFFFFF;
+    border: 1px solid #C9CACC;
+    border-radius: 4px;
+  
+    flex: none;
+    order: 1;
+    align-self: stretch;
+    flex-grow: 0;
+  }
+  
+  .button-login-page {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 7px;
+    margin-top: 32px;
+    gap: 10px;
+  
+    width: 345px;
+    height: 50px;
+  
+    background: linear-gradient(104.34deg, #41522E -15.34%, #BE8022 145.95%);
+    box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.15);
+    border-radius: 4px;
+    border-style: none;
+  
+    flex: none;
+    order: 2;
+    align-self: stretch;
+    flex-grow: 0;
+  }
+  
+  .button-login-page:hover {
+    cursor: pointer;
+    background: linear-gradient(0deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.2)), linear-gradient(104.34deg, #41522E -15.34%, #BE8022 145.95%);
+  }
+  
+  .button-login-page:active {
+    cursor: pointer;
+    background: linear-gradient(0deg, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), linear-gradient(104.34deg, #41522E -15.34%, #BE8022 145.95%);
+  }
+  
+  .button-login-page p {
+    width: 46px;
+    height: 20px;
+  
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 20px;
+  
+    display: flex;
+    align-items: center;
+    text-align: center;
+  
+    color: #FFFFFF;
+  
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+  }

@@ -1,4 +1,5 @@
 import { useTranslation } from 'react-i18next';
+import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Form, Button, InputGroup } from 'react-bootstrap';
 import { useFormik } from 'formik';
@@ -11,7 +12,6 @@ import formatDateToStringByDot from '../../../formatters/formatDateToStringByDot
 const HotelSearchForm = () => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
-  const hotelList = useSelector((state) => state.hotels.hotelList);
   const selectedDate = useSelector((state) => state.calendar.date);
 
   const formik = useFormik({
@@ -24,9 +24,12 @@ const HotelSearchForm = () => {
       dispatch(setCounterDaysStay(days));
       dispatch(setSearchParams({ location, date: selectedDate, days }));
       dispatch({ type: sagaActions.fetch_data });
-      console.log(hotelList);
     },
   });
+
+  useEffect(() => {
+    formik.setFieldValue('date', formatDateToStringByDot(selectedDate));
+  }, [selectedDate]);
 
   return (
     <Form onSubmit={formik.handleSubmit}>

@@ -46,7 +46,6 @@ const HotelItem = ({ hotelId }) => {
 
   const handleFavoriteHotel = () => {
     const isTheHotelFavorite = favoriteHotels.includes(hotelId);
-    console.log('point1');
     if (isTheHotelFavorite) {
       dispatch(deleteFavoriteHotel(hotelData));
       return;

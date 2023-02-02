@@ -16,7 +16,9 @@ const calendarSlice = createSlice({
       state.uiState = false;
     },
     setDate: (state, action) => {
-      state.date = action.payload;
+      const date = action.payload;
+      const hoursInMoscowUTC = date.getHours() + 3;
+      state.date = new Date(date.getFullYear(), date.getMonth(), date.getDate(), hoursInMoscowUTC);
     },
   },
 });

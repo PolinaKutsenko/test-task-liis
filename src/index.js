@@ -4,9 +4,9 @@ import { I18nextProvider, initReactI18next } from 'react-i18next';
 import i18n from 'i18next';
 import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
-import './index.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
+import './index.css';
 import App from './components/App';
 import ru from './locales/ru.js';
 import store from './slices/index.js';

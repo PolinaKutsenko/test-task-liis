@@ -1,5 +1,4 @@
 import { createSlice } from '@reduxjs/toolkit';
-import translateCitiesOnEn from '../locales/translateCitiesOnEn.js';
 import formatDateToStringByDash from '../formatters/formatDateToStringByDash.js';
 
 const getInitialURL = () => new URL('http://engine.hotellook.com/api/v2/cache.json');
@@ -27,14 +26,13 @@ const searchSlice = createSlice({
     setSearchParams: (state, action) => {
       const { location, date, days } = action.payload;
       const checkInDate = new Date(date);
-      const translateLocation = translateCitiesOnEn[location];
       const checkInDateYear = checkInDate.getFullYear();
       const checkInDateMonth = checkInDate.getMonth();
       const checkInDateDate = checkInDate.getDate() + Number(days);
       const checkOutDate = new Date(checkInDateYear, checkInDateMonth, checkInDateDate);
 
       state.searchParams = {
-        location: translateLocation,
+        location,
         currency: 'rub',
         checkIn: formatDateToStringByDash(checkInDate),
         checkOut: formatDateToStringByDash(checkOutDate),

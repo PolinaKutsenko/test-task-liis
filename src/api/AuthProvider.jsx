@@ -3,14 +3,14 @@ import { AuthContext } from '../hooks/index.js';
 
 const AuthProvider = ({ children }) => {
   const initialState = localStorage.getItem('user') === 'authorization';
-  const [loggedIn, setloggedIn] = useState(initialState);
+  const [loggedIn, setLoggedIn] = useState(initialState);
 
   const logIn = () => {
-    setloggedIn(true);
+    setLoggedIn(true);
   };
   const logOut = () => {
     localStorage.removeItem('user');
-    setloggedIn(false);
+    setLoggedIn(false);
   };
 
   const authObject = useMemo(() => ({ loggedIn, logIn, logOut }), [loggedIn]);

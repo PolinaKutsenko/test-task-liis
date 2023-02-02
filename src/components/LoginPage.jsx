@@ -1,38 +1,20 @@
+import { useTranslation } from 'react-i18next';
 import React, { useRef, useEffect } from 'react';
-import {
-  Form, Button, Card, Container, Row, Col,
-} from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
-import { useTranslation } from 'react-i18next';
+import cn from 'classnames';
 
+import loginPageBackground from '../assets/loginPageBackground.png';
+import '../css/LoginPage.css';
 import routes from '../routes.js';
 import { useAuth } from '../hooks/index.js';
 
-const FormContainer = ({ children }) => (
-  <Container fluid className="h-100">
-    <Row className="justify-content-center align-content-center h-100">
-      <Col xs="12" md="8" xxl="6">
-        <Card>
-          <Card.Body className="p-5">
-            <Row>
-              <Col>
-                {children}
-              </Col>
-            </Row>
-          </Card.Body>
-        </Card>
-      </Col>
-    </Row>
-  </Container>
-);
-
 const LoginPage = () => {
+  const { t } = useTranslation();
   const auth = useAuth();
   const inputEl = useRef();
   const navigate = useNavigate();
-  const { t } = useTranslation();
 
   useEffect(() => {
     inputEl.current.focus();
@@ -61,51 +43,49 @@ const LoginPage = () => {
     },
   });
 
+  const getLableClassNames = (field) => (
+    cn('form-label-login-page', {
+      'invalid-label-login-page': formik.errors[field] && formik.touched[field],
+    })
+  );
+
   return (
-    <FormContainer>
-      <Form
-        onSubmit={formik.handleSubmit}
-      >
-        <h1 className="text-center mb-4">{t('login_page.nameLoginForm')}</h1>
-        <Form.Group>
-          <Form.Label htmlFor="username">{t('login_page.username')}</Form.Label>
-          <Form.Control
-            id="username"
-            name="username"
-            placeholder="username"
-            autoComplete="username"
-            required
-            ref={inputEl}
-            value={formik.values.username}
-            onChange={formik.handleChange}
-            isValid={formik.touched.username && !formik.errors.username}
-            isInvalid={formik.errors.username}
-          />
-          <Form.Control.Feedback type="invalid">
-            {formik.errors.username}
-          </Form.Control.Feedback>
-        </Form.Group>
-        <Form.Group>
-          <Form.Label htmlFor="password">{t('login_page.password')}</Form.Label>
-          <Form.Control
-            type="password"
-            id="password"
-            name="password"
-            placeholder="password"
-            autoComplete="current-password"
-            required
-            value={formik.values.password}
-            onChange={formik.handleChange}
-            isValid={formik.touched.password && !formik.errors.password}
-            isInvalid={formik.errors.password}
-          />
-          <Form.Control.Feedback type="invalid">
-            {formik.errors.password}
-          </Form.Control.Feedback>
-        </Form.Group>
-        <Button type="submit" variant="outline-primary">{t('login_page.submit')}</Button>
-      </Form>
-    </FormContainer>
+    <>
+      <img className="background-image-login-page" src={loginPageBackground} alt="background" />
+      <div className="fade-login-page" />
+      <div className="form-container-login-page">
+        <form onSubmit={formik.handleSubmit}>
+          <h1 className="simple-hotel">{t('login_page.nameLoginForm')}</h1>
+          <div>
+            <label className={getLableClassNames('username')} htmlFor="username">{t('login_page.username')}</label>
+            <input
+              name="username"
+              required
+              id="username"
+              className="form-control-input"
+              ref={inputEl}
+              value={formik.values.username}
+              onChange={formik.handleChange}
+            />
+            {formik.errors.username && formik.touched.username && <div className="invalid-feedback-login-page">{formik.errors.username}</div>}
+          </div>
+          <div>
+            <label className={getLableClassNames('password')} htmlFor="password">{t('login_page.password')}</label>
+            <input
+              name="password"
+              required
+              type="password"
+              id="password"
+              className="form-control-input"
+              value={formik.values.password}
+              onChange={formik.handleChange}
+            />
+            {formik.errors.password && formik.touched.username && <div className="invalid-feedback-login-page">{formik.errors.password}</div>}
+          </div>
+          <button type="submit" className="button-login-page"><p>{t('login_page.submit')}</p></button>
+        </form>
+      </div>
+    </>
   );
 };
 
