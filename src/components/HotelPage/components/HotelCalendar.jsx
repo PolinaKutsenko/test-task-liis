@@ -159,8 +159,12 @@ const Calendar = () => {
           {baseProps.years.map((year) => (
             <option key={year} value={year}>{year}</option>))}
         </select>
-        <button type="button" onClick={handleNextMonthButtonClick}><i className="fas fa-arrow-up-long">{}</i></button>
-        <button type="button" onClick={handlePrevMonthButtonClick}><i className="fas fa-arrow-down-long">{}</i></button>
+        <button type="button" onClick={handleNextMonthButtonClick} className="HC-button-up-down">
+          <i className="fas fa-arrow-up-long HC-color-arrow">{}</i>
+        </button>
+        <button type="button" onClick={handlePrevMonthButtonClick} className="HC-button-up-down">
+          <i className="fas fa-arrow-down-long HC-color-arrow">{}</i>
+        </button>
       </header>
 
       <table>

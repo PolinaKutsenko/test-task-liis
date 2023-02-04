@@ -1,21 +1,77 @@
-.hotel-form-input {
+.HP-m-b-16 {
+    margin-bottom: 16px;
+}
+
+.HP-m-b-20 {
+    margin-bottom: 20px;
+}
+
+.HP-position {
+    position: relative;
+}
+
+.HP-search-form-label {
+    width: 150px;
+    height: 19px;
+
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 19px;
+
+    display: flex;
+    align-items: center;
+
+    color: #424242;
+
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+}
+
+
+.HP-form-input {
     box-sizing: border-box;
-    width: 250px;
-    height: 50px;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
     padding: 15px;
+    gap: 10px;
+    margin-top: 7px;
+
+    width: 296px;
+    height: 50px;
+
     background: #FFFFFF;
     border: 1px solid #C9CACC;
     border-radius: 4px;
+    flex: none;
+    order: 1;
+    align-self: stretch;
+    flex-grow: 0;
 }
 
 .hotel-form-button {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
     padding: 7px;
-    width: 250px;
+    gap: 10px;
+    margin-top: 32px;
+
+    width: 296px;
     height: 50px;
+
     background: linear-gradient(104.34deg, #41522E -15.34%, #BE8022 145.95%);
     box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.15);
     border-radius: 4px;
-    margin-top: 15px;
+    border-style: none;
+    flex: none;
+    order: 1;
+    align-self: stretch;
+    flex-grow: 0;
 }
 
 .hotel-form-button:hover {
@@ -26,4 +82,34 @@
 .hotel-form-button:active {
     cursor: pointer;
     background: linear-gradient(0deg, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), linear-gradient(104.34deg, #41522E -15.34%, #BE8022 145.95%);
+}
+
+.hotel-form-button p {
+    width: 47px;
+    height: 20px;
+
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 20px;
+
+    display: flex;
+    align-items: center;
+    text-align: center;
+
+    color: #FFFFFF;
+}
+
+.HP-icon-calendar {
+    position: absolute;
+    right: 12px;
+    top: 12px;
+    color: rgba(0, 0, 0, 0.48);
+    border: none;
+    background-color: #FFFFFF;
+}
+
+.HP-icon-calendar i {
+    color: rgba(0, 0, 0, 0.48);
 }

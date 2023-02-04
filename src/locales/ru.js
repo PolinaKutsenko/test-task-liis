@@ -33,8 +33,8 @@ export default {
         initial_location: 'Москва',
       },
       form_of_sorted_favorites: {
-        sorted_by_price: 'Сортировать по цене',
-        sorted_by_stars: 'Сортировать по количеству звезд',
+        sorted_by_price: 'Цена',
+        sorted_by_stars: 'Рейтинг',
         increase: 'По возрастанию',
         decrease: 'По убыванию',
       },

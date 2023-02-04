@@ -1,7 +1,4 @@
 import { useSelector, useDispatch } from 'react-redux';
-import {
-  Col, Row, Card, Container, Button,
-} from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 import cn from 'classnames';
 import _ from 'lodash';
@@ -12,16 +9,16 @@ import '../../../css/HotelItem.css';
 
 const Stars = ({ starCount }) => {
   const emptyArray = [0, 1, 2, 3, 4];
-  const starArray = emptyArray.map((index) => (index + 1 > starCount ? 0 : 1));
+  const starArray = emptyArray.map((index) => (index + 1 <= starCount ? 1 : 0));
   const starsClassNames = starArray.map((star) => (
-    cn('fa-star', {
-      far: star === 0,
-      fas: star === 1,
+    cn({
+      star: star === 0,
+      'active-star': star === 1,
     })));
   return (
     <span>
       {starsClassNames.map((starClassName) => (
-        <span key={_.uniqueId()}><i className={starClassName} /></span>))}
+        <span key={_.uniqueId()} className={starClassName}>★</span>))}
     </span>
   );
 };
@@ -39,11 +36,6 @@ const HotelItem = ({ hotelId }) => {
   const { date: checkInDate } = useSelector((state) => state.calendar);
   const formattedCheckInDate = formatDateToStringByFullDate(checkInDate);
 
-  const heartClassName = cn('fa-heart', {
-    far: !favoriteHotels.includes(hotelId),
-    fas: favoriteHotels.includes(hotelId),
-  });
-
   const handleFavoriteHotel = () => {
     const isTheHotelFavorite = favoriteHotels.includes(hotelId);
     if (isTheHotelFavorite) {
@@ -53,36 +45,40 @@ const HotelItem = ({ hotelId }) => {
     dispatch(addFavoriteHotel(hotelData));
   };
 
+  const isFavorite = favoriteHotels.includes(hotelId);
+
   return (
-    <Container fluid className="h-900">
-      <Card>
-        <Row className="justify-content-center align-content-center h-100">
-          {!favoriteHotels.includes(hotelId) && (
-          <Col>
-            <span className="fa-stack fa-3x homeIcon">
-              <i className="fas fa-circle fa-stack-2x" />
-              <i className="fas fa-house fa-stack-1x fa-inverse" />
-            </span>
-          </Col>
-          )}
-          <Col xs={6}>
-            <Row><h5>{hotelData.hotelName}</h5></Row>
-            <Row><p>{`${formattedCheckInDate} - ${t('hotel_page.hotel_item.daysCount', { count: Number(counterDaysStay) })}`}</p></Row>
-            <Row><Stars starCount={hotelData.stars} /></Row>
-          </Col>
-          <Col>
-            <Row>
-              <Button onClick={handleFavoriteHotel} type="button" variant="secondary" className="likeButton">
-                <i className={heartClassName} />
-              </Button>
-            </Row>
-            <Row>
-              <span>{`${t('hotel_page.hotel_item.price')} ${Math.round(hotelData.priceAvg)} ${t('hotel_page.hotel_item.currency')}`}</span>
-            </Row>
-          </Col>
-        </Row>
-      </Card>
-    </Container>
+    <>
+      <div className={isFavorite ? 'hotel-item-fav-container' : 'hotel-item-container'}>
+        {!isFavorite && (
+        <div className="hotel-item-house-container">
+          <div className="house-roof" />
+          <div className="house-main"><p className="house-main-door" /></div>
+        </div>
+        )}
+        <div className={isFavorite ? 'hotel-item-fav-name' : 'hotel-item-name'}>
+          {hotelData.hotelName}
+        </div>
+        <div className={isFavorite ? 'hotel-item-fav-dash' : 'hotel-item-dash'} />
+        <div className={isFavorite ? 'hotel-item-fav-date' : 'hotel-item-date'}>
+          {formattedCheckInDate}
+        </div>
+        <div className={isFavorite ? 'hotel-item-count-of-days-fav' : 'hotel-item-count-of-days'}>
+          {t('hotel_page.hotel_item.daysCount', { count: Number(counterDaysStay) })}
+        </div>
+        <div className={isFavorite ? 'stars-fav' : 'stars'}>
+          <Stars starCount={hotelData.stars} />
+        </div>
+        <div className={isFavorite ? 'hotel-item-fav-price' : 'hotel-item-price'}>{`${t('hotel_page.hotel_item.price')} :`}</div>
+        <div className={isFavorite ? 'hotel-item-fav-price-value' : 'hotel-item-price-value'}>
+          {`${Math.round(hotelData.priceAvg)} ${t('hotel_page.hotel_item.currency')}`}
+        </div>
+        <button onClick={handleFavoriteHotel} type="button" className="hotel-item-button-heart">
+          <div className={isFavorite ? 'heart-active' : 'heart'}> </div>
+        </button>
+      </div>
+      <div className={isFavorite ? 'hotel-item-fav-divide-line' : 'hotel-item-divide-line'} />
+    </>
   );
 };
 

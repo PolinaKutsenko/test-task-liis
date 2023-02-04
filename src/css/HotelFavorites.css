@@ -1,0 +1,124 @@
+.hotel-page-fav-container {
+    width: 124px;
+    height: 28px;
+
+    display: flex;
+    align-items: center;
+
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+}
+
+.hotel-page-fav-container span {
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 24px;
+    line-height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    color: #424242;
+}
+
+.hotel-page-fav-select-container {    
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 4px;
+    
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+}
+
+.fav-select-input {
+    box-sizing: border-box;
+    position: relative;
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 4px 8px;
+    gap: 4px;
+
+    width: 115px;
+    height: 28px;
+
+    background: #FFFFFF;
+    border: 1px solid #41522E;
+    border-radius: 4px;
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+}
+
+.fav-select-input span {
+    width: 51px;
+    height: 20px;
+
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 20px;
+
+    letter-spacing: -0.408px;
+
+    color: #41522E;
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+}
+
+.fav-icon-increase,
+.fav-icon-decrease {
+    position: absolute;
+    height: 26px;
+    width: 26px;
+
+    border-style: none;
+    background-color: #FFFFFF;
+    border-radius: 30%;
+}
+
+.fav-icon-increase {
+    right: 26px;
+    top: 0px;
+}
+
+.fav-icon-decrease {
+    right: 0px;
+    top: 0px;
+}
+
+.fav-icon-increase i,
+.fav-icon-decrease i {
+    color: #99A0A3;
+}
+
+.fav-icon-increase i:active,
+.fav-icon-decrease i:active {
+    color: #41522E;
+}
+
+.overflow-element-favorites {
+    width: 296px;
+    height: 288px;
+    overflow: auto;
+    overflow-x: hidden;
+}
+
+.overflow-element-favorites::-webkit-scrollbar {
+    width: 3px;
+    background-color: #E7E7E7;
+}
+
+.overflow-element-favorites::-webkit-scrollbar-thumb {
+    width: 3px;
+    background-color: #41522E;
+    height: 100.66px;
+}
+

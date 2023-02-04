@@ -1,3 +1,12 @@
+.HC-button-up-down {
+    border: none;
+    background-color: #FFFFFF;
+}
+
+.HC-color-arrow {
+    color: rgba(0, 0, 0, 0.48);
+}
+
 .calendar header {
     display: flex;
     justify-content: center;

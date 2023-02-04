@@ -1,7 +1,6 @@
 import { useTranslation } from 'react-i18next';
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { Form, Button, InputGroup } from 'react-bootstrap';
 import { useFormik } from 'formik';
 
 import '../../../css/HotelSearchForm.css';
@@ -33,45 +32,50 @@ const HotelSearchForm = () => {
   }, [selectedDate]);
 
   return (
-    <Form onSubmit={formik.handleSubmit}>
-      <Form.Group>
-        <Form.Label htmlFor="location">{t('hotel_page.form_of_found_hotels.location')}</Form.Label>
-        <Form.Control
+    <form onSubmit={formik.handleSubmit}>
+      <div className="HP-m-b-16">
+        <label className="HP-search-form-label" htmlFor="location">{t('hotel_page.form_of_found_hotels.location')}</label>
+        <input
           id="location"
           name="location"
           required
           value={formik.values.location}
           onChange={formik.handleChange}
-          className="hotel-form-input"
+          className="HP-form-input"
         />
-      </Form.Group>
-      <Form.Group>
-        <Form.Label htmlFor="date">{t('hotel_page.form_of_found_hotels.date')}</Form.Label>
-        <InputGroup className="mb-3">
-          <Form.Control
+      </div>
+      <div>
+        <label className="HP-search-form-label" htmlFor="date">{t('hotel_page.form_of_found_hotels.date')}</label>
+        <div className="HP-m-b-20 HP-position">
+          <input
             id="date"
             name="date"
             required
             value={formik.values.date}
             onChange={formik.handleChange}
-            className="hotel-form-input"
+            className="HP-form-input"
           />
-          <Button variant="secondary" onClick={() => dispatch(show())}><i className="far fa-calendar" /></Button>
-        </InputGroup>
-      </Form.Group>
-      <Form.Group>
-        <Form.Label htmlFor="days">{t('hotel_page.form_of_found_hotels.days')}</Form.Label>
-        <Form.Control
+          <button type="button" onClick={() => dispatch(show())} className="HP-icon-calendar">
+            <i className="far fa-calendar fa-lg" />
+            {}
+          </button>
+        </div>
+      </div>
+      <div>
+        <label className="HP-search-form-label" htmlFor="days">{t('hotel_page.form_of_found_hotels.days')}</label>
+        <input
           id="days"
           name="days"
           required
           value={formik.values.days}
           onChange={formik.handleChange}
-          className="hotel-form-input"
+          className="HP-form-input"
         />
-      </Form.Group>
-      <Button className="hotel-form-button" variant="secondary" type="submit">{t('hotel_page.form_of_found_hotels.found')}</Button>
-    </Form>
+      </div>
+      <button className="hotel-form-button" type="submit">
+        <p>{t('hotel_page.form_of_found_hotels.found')}</p>
+      </button>
+    </form>
   );
 };
 
