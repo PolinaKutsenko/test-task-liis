@@ -1,0 +1,19 @@
+.hotel-carousel-icon {
+    display: flex;
+    width: 30px;
+    height: 149px;
+    justify-content: center;
+    align-items: center;
+    border-style: none;
+    background-color: #FFFFFF;
+}
+
+.hotel-carousel-icon i {
+    color: #A7A7A7;
+}
+
+.carousel-picture-item {
+    display: flex;
+    width: 164px;
+    height: 149px;
+}

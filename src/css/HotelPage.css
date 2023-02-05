@@ -225,8 +225,8 @@
     display: flex;
     width: 600px;
     height: 149px;
-    border: 1px solid orange;
     flex-direction: row;
+    gap: 12px;
 }
 
 .hotel-page-list-hotel-container {

@@ -1,5 +1,6 @@
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
+import { useState } from 'react';
 
 import {
   sortedByPriceIncrease,
@@ -12,6 +13,7 @@ import '../../../css/HotelFavorites.css';
 
 const HotelFavorites = () => {
   const { t } = useTranslation();
+  const [activeSelect, setActiveSelect] = useState('');
   const dispatch = useDispatch();
   const favoriteHotelListId = useSelector((state) => state.favorites.favoriteHotels.ids);
 
@@ -19,9 +21,11 @@ const HotelFavorites = () => {
     switch (sorting) {
       case 'increase':
         dispatch(sortedByPriceIncrease());
+        setActiveSelect('price-increase');
         break;
       case 'decrease':
         dispatch(sortedByPriceDecrease());
+        setActiveSelect('price-decrease');
         break;
       default:
         break;
@@ -31,9 +35,11 @@ const HotelFavorites = () => {
     switch (sorting) {
       case 'increase':
         dispatch(sortedByStarsIncrease());
+        setActiveSelect('stars-increase');
         break;
       case 'decrease':
         dispatch(sortedByStarsDecrease());
+        setActiveSelect('stars-decrease');
         break;
       default:
         break;
@@ -44,24 +50,42 @@ const HotelFavorites = () => {
     <>
       <div className="hotel-page-fav-container"><span>{t('hotel_page.favorites')}</span></div>
       <div className="hotel-page-fav-select-container">
-        <div className="fav-select-input">
-          <span>{t('hotel_page.form_of_sorted_favorites.sorted_by_stars')}</span>
-          <button type="button" onClick={handleSortedByStars('increase')} className="fav-icon-increase">
+        <div className={activeSelect.includes('stars') ? 'fav-select-input-active' : 'fav-select-input-inactive'}>
+          <span>
+            {t('hotel_page.form_of_sorted_favorites.sorted_by_stars')}
+          </span>
+          <button
+            type="button"
+            onClick={handleSortedByStars('increase')}
+            className={activeSelect === 'stars-increase' ? 'fav-icon-increase-active' : 'fav-icon-increase'}
+          >
             <i className="fas fa-angle-up" />
             {}
           </button>
-          <button type="button" onClick={handleSortedByStars('decrease')} className="fav-icon-decrease">
+          <button
+            type="button"
+            onClick={handleSortedByStars('decrease')}
+            className={activeSelect === 'stars-decrease' ? 'fav-icon-decrease-active' : 'fav-icon-decrease'}
+          >
             <i className="fas fa-angle-down" />
             {}
           </button>
         </div>
-        <div className="fav-select-input">
+        <div className={activeSelect.includes('price') ? 'fav-select-input-active' : 'fav-select-input-inactive'}>
           <span>{t('hotel_page.form_of_sorted_favorites.sorted_by_price')}</span>
-          <button type="button" onClick={handleSortedByPrice('increase')} className="fav-icon-increase">
+          <button
+            type="button"
+            onClick={handleSortedByPrice('increase')}
+            className={activeSelect === 'price-increase' ? 'fav-icon-increase-active' : 'fav-icon-increase'}
+          >
             <i className="fas fa-angle-up" />
             {}
           </button>
-          <button type="button" onClick={handleSortedByPrice('decrease')} className="fav-icon-decrease">
+          <button
+            type="button"
+            onClick={handleSortedByPrice('decrease')}
+            className={activeSelect === 'price-decrease' ? 'fav-icon-decrease-active' : 'fav-icon-decrease'}
+          >
             <i className="fas fa-angle-down" />
             {}
           </button>

@@ -34,7 +34,8 @@
     flex-grow: 0;
 }
 
-.fav-select-input {
+.fav-select-input-active,
+.fav-select-input-inactive {
     box-sizing: border-box;
     position: relative;
 
@@ -48,14 +49,22 @@
     height: 28px;
 
     background: #FFFFFF;
-    border: 1px solid #41522E;
     border-radius: 4px;
     flex: none;
     order: 0;
     flex-grow: 0;
 }
 
-.fav-select-input span {
+.fav-select-input-active {
+    border: 1px solid #41522E;
+}
+
+.fav-select-input-inactive {
+    border: 1px solid #E5E5E5;
+}
+
+.fav-select-input-active span,
+.fav-select-input-inactive span {
     width: 51px;
     height: 20px;
 
@@ -73,8 +82,18 @@
     flex-grow: 0;
 }
 
+.fav-select-input-active span {
+    color: #41522E;
+}
+
+.fav-select-input-inactive span {
+    color: #99A0A3;
+}
+
 .fav-icon-increase,
-.fav-icon-decrease {
+.fav-icon-decrease,
+.fav-icon-increase-active,
+.fav-icon-decrease-active {
     position: absolute;
     height: 26px;
     width: 26px;
@@ -84,12 +103,14 @@
     border-radius: 30%;
 }
 
-.fav-icon-increase {
+.fav-icon-increase,
+.fav-icon-increase-active {
     right: 26px;
     top: 0px;
 }
 
-.fav-icon-decrease {
+.fav-icon-decrease,
+.fav-icon-decrease-active {
     right: 0px;
     top: 0px;
 }
@@ -99,8 +120,8 @@
     color: #99A0A3;
 }
 
-.fav-icon-increase i:active,
-.fav-icon-decrease i:active {
+.fav-icon-increase-active i,
+.fav-icon-decrease-active i {
     color: #41522E;
 }
 

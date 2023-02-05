@@ -56,7 +56,7 @@
     height: 0; 
     width: 0;
     position: absolute; 
-    left: 2.5px;
+    left: 3px;
     top: 3px;
     background: transparent;
     border-bottom: 14.5px solid rgb(239, 241, 245);
@@ -117,6 +117,11 @@
     position: absolute;
     top: 19.19%;
     bottom: 59.6%;
+
+    white-space: nowrap;
+    overflow-x: hidden;
+    overflow-y: hidden;
+    text-overflow: ellipsis;
   
     font-family: 'Roboto';
     font-style: normal;
@@ -130,16 +135,13 @@
   }
 
   .hotel-item-name {
+    width: 440px;
     left: 15.07%;
   }
 
   .hotel-item-fav-name {
     width: 250px;
     left: 1%;
-    white-space: nowrap;
-    overflow-x: hidden;
-    overflow-y: hidden;
-    text-overflow: ellipsis;
   }
   
   .hotel-item-date,
@@ -178,8 +180,8 @@
   }
 
   .hotel-item-dash {
-    left: 32.53%;
-    right: 65.92%;
+    left: 33.53%;
+    right: 64.92%;
   }
 
   .hotel-item-fav-dash {
@@ -242,8 +244,6 @@
   .hotel-item-price,
   .hotel-item-fav-price {
     position: absolute;
-    top: 58.59%;
-    bottom: 23.23%;
   
     font-family: 'Roboto';
     font-style: normal;
@@ -258,18 +258,20 @@
 
   .hotel-item-price {
     left: 78.42%;
+    top: 58.59%;
+    bottom: 23.23%;
   }
 
   .hotel-item-fav-price {
     left: 62.84%;
+    top: 65.59%;
+    bottom: 16.23%;
   }
   
   .hotel-item-price-value,
   .hotel-item-fav-price-value {
     position: absolute;
     right: 2.74%;
-    top: 56.57%;
-    bottom: 22.22%;
   
     font-family: 'Roboto';
     font-style: normal;
@@ -285,10 +287,14 @@
 
   .hotel-item-price-value {
     left: 84.59%;
+    top: 56.57%;
+    bottom: 22.22%;
   }
 
   .hotel-item-fav-price-value {
     left: 75%;
+    top: 62.57%;
+    bottom: 16.22%;
   }
   
   .heart,
