@@ -52,7 +52,6 @@ const HotelSearchForm = () => {
             name="date"
             required
             value={formik.values.date}
-            onChange={formik.handleChange}
             className="HP-form-input"
           />
           <button type="button" onClick={() => dispatch(show())} className="HP-icon-calendar">

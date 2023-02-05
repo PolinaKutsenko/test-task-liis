@@ -14,6 +14,8 @@ const HotelPage = () => {
   const { t } = useTranslation();
   const hotelListId = useSelector((state) => state.hotels.hotelList.ids);
   const favoriteHotelListId = useSelector((state) => state.favorites.favoriteHotels.ids);
+  const hotelListIdWithoutFavorites = hotelListId.filter((id) => !favoriteHotelListId.includes(id));
+
   const city = useSelector(({ searchParams }) => searchParams.searchParams.location);
   const { date: checkInDate } = useSelector((state) => state.calendar);
   const formattedCheckInDate = formatDateToStringByFullDate(checkInDate);
@@ -51,7 +53,7 @@ const HotelPage = () => {
             <div className="hotel-page-carousel-container"><HotelCarousel /></div>
             <div className="hotel-page-list-hotel-container">
               <div className="hotel-page-add-in-fav">{t('hotel_page.favoritesHotelCount', { count: favoriteHotelListId.length })}</div>
-              <div className="overflow-element-hotels">{hotelListId.map((id) => (<HotelItem key={id} hotelId={id} />))}</div>
+              <div className="overflow-element-hotels">{hotelListIdWithoutFavorites.map((id) => (<HotelItem key={id} hotelId={id} />))}</div>
             </div>
           </div>
         </main>
