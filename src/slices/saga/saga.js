@@ -27,7 +27,7 @@ function* initialSaga() {
   const date = yield select(({ calendar }) => calendar.date);
   const initialValues = {
     location: 'Москва',
-    date: formatDateToStringByDot(date),
+    date,
     days: '1',
   };
   yield put(setSearchParams(initialValues));
