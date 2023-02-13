@@ -5,7 +5,6 @@ import Axios from 'axios';
 import { fetchData } from '../hotelsSlice.js';
 import { setUrl, fetchFailed, setSearchParams } from '../searchSlice.js';
 import sagaActions from './sagaActions.js';
-import formatDateToStringByDot from '../../formatters/formatDateToStringByDot.js';
 
 const callAPI = async ({ url, method, data }) => {
   const result = await Axios({ url, method, data });
